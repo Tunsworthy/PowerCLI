@@ -45,7 +45,7 @@ Function to connect to VCs
     Function Connect ($VC_server) {
         if ($global:DefaultVIServers.Count -gt 0) {Disconnect-VIServer -Server * -Force -confirm: $false} 
         Try {Connect-VIServer $VC_Server -WarningAction SilentlyContinue -ErrorAction stop | Out-Null
-           Write-output "Successfully conncted to vCenter"}
+           Write-output "Successfully conncted to vCenter $($global:DefaultVIServers.name)"}
         Catch {Write-Error "Failed to connect"}
       }
  <#-------------------------------
@@ -57,7 +57,7 @@ Displaying the menu
     foreach ($VC in $VC_FQDN){
          $info = New-Object System.Object 
             $info | Add-Member -type NoteProperty -name ID -Value $loopnum
-            $info | Add-Member -type NoteProperty -name "Short Code" -Value $VC_scode[[int]$loopnum]
+            $info | Add-Member -type NoteProperty -name ShortCode -Value $VC_scode[[int]$loopnum]
             $info | Add-Member -type NoteProperty -name VCFQDN -Value $VC
         $script:VC_List += $info
         $script:loopnum ++   
@@ -79,9 +79,9 @@ Displaying the menu
             write-host $ErrorMessage
             }
         }      
-       if ($Selection -in $VC_List.Custcode){
+       if ($Selection -in $VC_List.ShortCode){
           foreach ($VC in $VC_list){
-            if ($Selection -match $VC.custcode){
+            if ($Selection -match $VC.ShortCode){
                 $connect = $VC.VCFQDN
                 break
             }
