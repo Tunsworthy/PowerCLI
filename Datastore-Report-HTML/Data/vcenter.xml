@@ -1,0 +1,9 @@
+<?xml version="1.0" ?> 
+<vcenter_servers>
+	<server>
+		<name></name>
+		<fqdn></fqdn>
+		<user></user>
+		<pass></pass>
+	</server>
+</vcenter_servers>
