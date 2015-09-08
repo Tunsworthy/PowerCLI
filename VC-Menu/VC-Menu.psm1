@@ -71,7 +71,7 @@ Displaying the menu
         $Selection
       )
 
-        if($Selection -match "[0-$script:loopnum]"){
+        if($Selection -in 0..$script:loopnum){
             try {
               Connect $VC_List.VCFQDN[[int]$Selection]
             }  
